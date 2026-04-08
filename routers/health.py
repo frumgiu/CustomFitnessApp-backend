@@ -6,6 +6,7 @@ import aiosqlite
 from fastapi import APIRouter, Depends, Header, HTTPException
 
 from db.database import get_db
+from dependencies import require_auth
 from models.health import CyclePhaseResponse, HealthSyncPayload, HealthSyncResponse, HealthSyncSummary
 
 router = APIRouter(prefix="/health", tags=["health"])
@@ -289,7 +290,7 @@ async def get_health_sync_summary(
     )
 
 
-@router.get("/cycle/current", response_model=CyclePhaseResponse)
+@router.get("/cycle/current", response_model=CyclePhaseResponse, dependencies=[Depends(require_auth)])
 async def get_current_cycle_phase(
     db: aiosqlite.Connection = Depends(get_db),
 ) -> CyclePhaseResponse:

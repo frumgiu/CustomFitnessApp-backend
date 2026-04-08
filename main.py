@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from db.database import init_db
-from routers import analytics, athlete, health, workout_stats, workouts
+from routers import analytics, athlete, auth, health, workout_stats, workouts
 
 
 @asynccontextmanager
@@ -27,6 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth.router)
 app.include_router(athlete.router)
 app.include_router(workouts.router)
 app.include_router(workout_stats.router)

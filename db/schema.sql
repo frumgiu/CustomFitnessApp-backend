@@ -1,3 +1,16 @@
+-- Utenti per autenticazione
+CREATE TABLE IF NOT EXISTS users (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    username     TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS session_tokens (
+    token       TEXT PRIMARY KEY,
+    user_id     INTEGER NOT NULL REFERENCES users(id),
+    created_at  TEXT NOT NULL   -- ISO 8601 UTC
+);
+
 -- Tabelle dati salute (iOS HealthKit bridge)
 
 CREATE TABLE IF NOT EXISTS health_steps (

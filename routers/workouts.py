@@ -8,9 +8,10 @@ import aiosqlite
 from fastapi import APIRouter, Depends, Query
 
 from db.database import get_db
+from dependencies import require_auth
 from models.workout import PaginatedWorkouts, WorkoutDetail, WorkoutListItem
 
-router = APIRouter(prefix="/api/workouts", tags=["workouts"])
+router = APIRouter(prefix="/api/workouts", tags=["workouts"], dependencies=[Depends(require_auth)])
 
 # Mappa tipi HealthKit → label display
 _SPORT_DISPLAY: dict[str, str] = {

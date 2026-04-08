@@ -13,6 +13,7 @@ import aiosqlite
 from fastapi import APIRouter, Depends, Query
 
 from db.database import get_db
+from dependencies import require_auth
 from models.activity import (
     ActivityRecord,
     HikeRecordsResponse,
@@ -26,7 +27,7 @@ from models.activity import (
     WeeklyStreakResponse,
 )
 
-router = APIRouter(prefix="/api/workouts", tags=["workout-stats"])
+router = APIRouter(prefix="/api/workouts", tags=["workout-stats"], dependencies=[Depends(require_auth)])
 
 _MESI_IT = [
     "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",

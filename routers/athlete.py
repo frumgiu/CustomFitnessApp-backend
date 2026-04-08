@@ -4,9 +4,10 @@ import aiosqlite
 from fastapi import APIRouter, Depends
 
 from db.database import get_db
+from dependencies import require_auth
 from models.athlete import AthleteProfile, AthleteProfileUpdate
 
-router = APIRouter(prefix="/api/athlete", tags=["athlete"])
+router = APIRouter(prefix="/api/athlete", tags=["athlete"], dependencies=[Depends(require_auth)])
 
 
 @router.get("/", response_model=AthleteProfile)

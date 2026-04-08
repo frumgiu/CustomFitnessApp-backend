@@ -4,6 +4,7 @@ import aiosqlite
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from db.database import get_db
+from dependencies import require_auth
 from models.analytics import (
     ActivityMetrics,
     ComputeResult,
@@ -13,7 +14,7 @@ from models.analytics import (
 )
 from services.analytics_service import compute_analytics, get_race_predictions
 
-router = APIRouter(prefix="/analytics", tags=["analytics"])
+router = APIRouter(prefix="/analytics", tags=["analytics"], dependencies=[Depends(require_auth)])
 
 
 @router.post("/compute", response_model=ComputeResult, status_code=200)
