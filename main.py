@@ -21,6 +21,7 @@ app.add_middleware(
         "http://localhost:3000",
         "capacitor://localhost",   # Capacitor iOS/Android
         "http://localhost",        # Capacitor fallback
+        "https://custom-fitness-app-frontend.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT"],
